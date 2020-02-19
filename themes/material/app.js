@@ -271,7 +271,7 @@ function file_video(path){
     <!--|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|-->
 	<video
     id="my-video"
-    class="video-js"
+    class="video-js mdui-video-fluid mdui-center"
     controls
     preload="auto"
     width="640"
