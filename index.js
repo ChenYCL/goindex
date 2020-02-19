@@ -1,7 +1,7 @@
 var authConfig = {
     "siteName": "GoIndex", // 网站名称
     "root_pass": "index",  // 根目录密码，优先于.password
-    "version": "1.0.6", // 程序版本
+    "version": "1.0.9", // 程序版本
     "theme": "material", // material  classic
     "client_id": "202264815644.apps.googleusercontent.com",
     "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
@@ -21,7 +21,8 @@ var html = `
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
-  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/donwa/goindex@${authConfig.version}/themes/${authConfig.theme}/app.js"></script>
+  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdeliver/gh/ChenYCL/goindex@${authConfig.version}/themes/${authConfig.theme}/app.js"></script>
 </head>
 <body>
 </body>
