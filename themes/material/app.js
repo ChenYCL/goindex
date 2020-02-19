@@ -3,8 +3,8 @@ document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/d
 // markdown支持
 document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
-document.write('<link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />');
-document.write('<script src="https://vjs.zencdn.net/7.6.6/video.js"></script>');
+document.write('<link href="//cdn.jsdelivr.net/npm/video.js@7.6.6/dist/video-js.css" rel="stylesheet" />');
+document.write('<script src="//cdn.jsdelivr.net/npm/video.js@7.6.6/dist/video.cjs.min.js"></script>');
 // 初始化页面，并载入必要资源
 function init(){
     document.siteName = $('title').html();
@@ -271,7 +271,7 @@ function file_video(path){
     <!--|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|-->
 	<video
     id="my-video"
-    class="video-js mdui-video-fluid mdui-center"
+    class="video-js"
     controls
     preload="auto"
     width="640"
