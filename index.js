@@ -9,7 +9,6 @@ var authConfig = {
     "root": "root",// 根目录ID
     "hidefolder": {
         "文件名1": 0, // 0 show 1 hide
-
     },
 };
 
