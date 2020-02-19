@@ -20,15 +20,15 @@ function init(){
 }
 
 function render(path){
-	if(path.indexOf("?") > 0){
-		path = path.substr(0,path.indexOf("?"));
-	}
+    if(path.indexOf("?") > 0){
+        path = path.substr(0,path.indexOf("?"));
+    }
     title(path);
     nav(path);
     if(path.substr(-1) == '/'){
-    	list(path);
+        list(path);
     }else{
-	    file(path);
+        file(path);
     }
 }
 
@@ -61,7 +61,7 @@ function nav(path){
 
 // 渲染文件列表
 function list(path){
-	var content = `
+    var content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 
 	 <div class="mdui-row"> 
@@ -88,8 +88,8 @@ function list(path){
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
-	$('#content').html(content);
-	
+    $('#content').html(content);
+
     var password = localStorage.getItem('password'+path);
     $('#list').html(`<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>`);
     $('#readme_md').hide().html('');
@@ -135,19 +135,19 @@ function list_files(path,files){
             var p = path+item.name;
             var c = "file";
             if(item.name == "README.md"){
-                 get_file(p, item, function(data){
+                get_file(p, item, function(data){
                     markdown("#readme_md",data);
                 });
             }
             if(item.name == "HEAD.md"){
-	            get_file(p, item, function(data){
+                get_file(p, item, function(data){
                     markdown("#head_md",data);
                 });
             }
             var ext = p.split('.').pop();
             if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
-	            p += "?a=view";
-	            c += " view";
+                p += "?a=view";
+                c += " view";
             }
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
 	          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
@@ -165,63 +165,63 @@ function list_files(path,files){
 
 
 function get_file(path, file, callback){
-	var key = "file_path_"+path+file['modifiedTime'];
-	var data = localStorage.getItem(key);
-	if(data != undefined){
-		return callback(data);
-	}else{
-		$.get(path, function(d){
-			localStorage.setItem(key, d);
+    var key = "file_path_"+path+file['modifiedTime'];
+    var data = localStorage.getItem(key);
+    if(data != undefined){
+        return callback(data);
+    }else{
+        $.get(path, function(d){
+            localStorage.setItem(key, d);
             callback(d);
         });
-	}
+    }
 }
 
 
 
 // 文件展示 ?a=view
 function file(path){
-	var name = path.split('/').pop();
-	var ext = name.split('.').pop().toLowerCase().replace(`?a=view`,"");
-	if("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
-		return file_code(path);
-	}
+    var name = path.split('/').pop();
+    var ext = name.split('.').pop().toLowerCase().replace(`?a=view`,"");
+    if("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
+        return file_code(path);
+    }
 
-	if("|mp4|webm|avi|".indexOf(`|${ext}|`) >= 0){
-		return file_video(path);
-	}
+    if("|mp4|webm|avi|".indexOf(`|${ext}|`) >= 0){
+        return file_video(path);
+    }
 
-	if("|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
-		return file_video(path);
-	}
-	
-	if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
-		return file_audio(path);
-	}
+    if("|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+        return file_video(path);
+    }
 
-	if("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
-		return file_image(path);
-	}
+    if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+        return file_audio(path);
+    }
+
+    if("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
+        return file_image(path);
+    }
 }
 
 // 文件展示 |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path){
-	var type = {
-		"html":"html",
-		"php":"php",
-		"css":"css",
-		"go":"golang",
-		"java":"java",
-		"js":"javascript",
-		"json":"json",
-		"txt":"Text",
-		"sh":"sh",
-		"md":"Markdown",	
-	};
-	var name = path.split('/').pop();
-	var ext = name.split('.').pop();
-	var href = window.location.origin + path;
-	var content = `
+    var type = {
+        "html":"html",
+        "php":"php",
+        "css":"css",
+        "go":"golang",
+        "java":"java",
+        "js":"javascript",
+        "json":"json",
+        "txt":"Text",
+        "sh":"sh",
+        "md":"Markdown",
+    };
+    var name = path.split('/').pop();
+    var ext = name.split('.').pop();
+    var href = window.location.origin + path;
+    var content = `
 <div class="mdui-container">
 <pre id="editor" ></pre>
 </div>
@@ -234,41 +234,54 @@ function file_code(path){
 <script src="https://cdn.staticfile.org/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.staticfile.org/ace/1.4.7/ext-language_tools.js"></script>
 	`;
-	$('#content').html(content);
-	
-	$.get(path, function(data){
-		$('#editor').html($('<div/>').text(data).html());
-		var code_type = "Text";
-		if(type[ext] != undefined ){
-			code_type = type[ext];
-		}
-		var editor = ace.edit("editor");
-	    editor.setTheme("ace/theme/ambiance");
-	    editor.setFontSize(18);
-	    editor.session.setMode("ace/mode/"+code_type);
-	    
-	    //Autocompletion
-	    editor.setOptions({
-	        enableBasicAutocompletion: true,
-	        enableSnippets: true,
-	        enableLiveAutocompletion: true,
-	        maxLines: Infinity
-	    });
-	});
+    $('#content').html(content);
+
+    $.get(path, function(data){
+        $('#editor').html($('<div/>').text(data).html());
+        var code_type = "Text";
+        if(type[ext] != undefined ){
+            code_type = type[ext];
+        }
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/ambiance");
+        editor.setFontSize(18);
+        editor.session.setMode("ace/mode/"+code_type);
+
+        //Autocompletion
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true,
+            maxLines: Infinity
+        });
+    });
 }
 
 // 文件展示 视频 |mp4|webm|avi|
 function file_video(path){
-	var url = window.location.origin + path;
-	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>在 potplayer 中播放</a>`;
-	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
-	    playBtn = `	<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>在mxplayer中播放</a>`;
-	}
-	var content = `
+    var url = window.location.origin + path;
+    var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>在 potplayer 中播放</a>`;
+    if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) { //移动端
+        playBtn = `	<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>在mxplayer中播放</a>`;
+    }
+    var content = `
 <div class="mdui-container-fluid">
 	<br>
+    <!--|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|-->
 	<video class="mdui-video-fluid mdui-center" preload controls>
 	  <source src="${url}" type="video/mp4">
+	  <source src="${url}" type="video/webm">
+	  <source src="${url}" type="video/avi">
+	  <source src="${url}" type="video/flv">
+	  <source src="${url}" type="video/mpg">
+	  <source src="${url}" type="video/mpeg">
+	  <source src="${url}" type="video/rm">
+	  <source src="${url}" type="video/rmvb">
+	  <source src="${url}" type="video/mov">
+	  <source src="${url}" type="video/wmv">
+	  <source src="${url}" type="video/asf">
+	  <source src="${url}" type="video/ts">
+	  <source src="${url}" type="video/m4v">
 	</video>
 	<br>${playBtn}
 	<!-- 固定标签 -->
@@ -283,13 +296,13 @@ function file_video(path){
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
-	$('#content').html(content);
+    $('#content').html(content);
 }
 
 // 文件展示 音频 |mp3|m4a|wav|ogg|
 function file_audio(path){
-	var url = window.location.origin + path;
-	var content = `
+    var url = window.location.origin + path;
+    var content = `
 <div class="mdui-container-fluid">
 	<br>
 	<audio class="mdui-center" preload controls>
@@ -308,14 +321,14 @@ function file_audio(path){
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
-	$('#content').html(content);
+    $('#content').html(content);
 }
 
 
 // 图片展示
 function file_image(path){
-	var url = window.location.origin + path;
-	var content = `
+    var url = window.location.origin + path;
+    var content = `
 <div class="mdui-container-fluid">
 	<br>
 	<img class="mdui-img-fluid" src="${url}"/>
@@ -336,7 +349,7 @@ function file_image(path){
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
-	$('#content').html(content);
+    $('#content').html(content);
 }
 
 
@@ -426,6 +439,6 @@ $(function(){
         render(url);
         return false;
     });
-    
+
     render(path);
 });
